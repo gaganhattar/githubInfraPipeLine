@@ -1,0 +1,69 @@
+name :"Github IAAC"
+# on: //events when the actions will trigger
+on:
+  push:
+    branches:
+      - main
+      - stage
+    paths:
+      - transform/**
+      # only for tech lead/arch, in cases where, the dev tested the code in stagging branch and then dev will request pull_request to approve the changes and merge to main branch, only some people like TL will have access to perfom any tasks on pull_request.
+  pull_request: 
+    branches:
+      - main
+    paths:
+      - terraform/**
+
+env:
+  # AWS Credentials for deployment to AWS for Terraform
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESSS_KEY: ${{secrets.AWS_SECRET_ACCESSS_KEY}}
+
+  # S3 bucket for the Terraform State
+  BUCKET_TF_STATE: ${{secrets.BUCKET_TF_STATE}} 
+  AWS_REGION: us-east-1
+  EKS_CLUSTER: github-practice-eks
+
+
+jobs: # jobs are steps to excute in the pipeline
+  terraform:
+    name: "Apply terraform code changes"
+    runs-on: ubuntu-latest #container with ubuntu image, runs below cmds/steps
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform #action will cd into this dir
+    
+    steps:
+      - name: "checkout the source code"
+        uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
+
+      - name: Setup Terraform with specified version on the runner/container
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        id:   init #refer in the next step
+        run:  terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+
+      - name: Terraform fmt
+        id:   fmt
+        run:  terraform fmt -check # -check optiin will enable returning 0 if the fmt cmd fails
+
+      - name: Terraform validate
+        id:   validate
+        run:  terraform validate 
+
+      - name: Terraform Plan
+        id:   plan
+        run: terraform plan -no-clor -input=false -out planfile # to see the -out to generate planfile for troublshooting to see details of the terraform genrated plan
+        continue-on-error: true #continue to the next step if terraform plan cmd fials
+
+      - name: Terraform plan status
+        if: steps.plam.outcome == 'failure'
+        run: exit 1 #the shell session gets exited, so this workflow session exits, by exiting or killing the ubuntu container
+    
+      # - name: Terraform apply
+        # id: apply
+        # run: terraform apply -auto-approve
+
+
