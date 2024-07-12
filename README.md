@@ -1,4 +1,4 @@
-# Terraform code 
+# Terraform code Practice
 
 ## Maintain vpc & eks with terraform for vprofile project
 
