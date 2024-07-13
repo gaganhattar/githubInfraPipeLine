@@ -43,7 +43,7 @@ jobs: # jobs are steps to excute in the pipeline
       run:
         shell: bash
         working-directory: ./terraform #action will cd into this dir
-    
+        
     steps:
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
@@ -51,13 +51,21 @@ jobs: # jobs are steps to excute in the pipeline
           token: ${{secrets.GIT_ACTION_TOKEN}}
           fetch-depth: 0
           ref: 'stage'
-      
+
+      - name: check environment vars
+        run: |   
+            echo "aws access key is ${{ secrets.AWS_ACCESS_KEY_ID }}"
+            echo "aws secret is ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
+       
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
+
+        
 
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
