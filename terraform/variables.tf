@@ -11,10 +11,7 @@ variable "clusterName" {
 }
 
 variable "S3BucketName" {
-  description = "Name of the EKS cluster"
+  description = "Name of the S3 bucket for storing Terraform state"
   type        = string
   default     = "github-tf-state-bkt"
 }
-
-## ##
-##
