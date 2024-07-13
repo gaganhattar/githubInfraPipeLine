@@ -40,12 +40,9 @@ jobs: # jobs are steps to excute in the pipeline
     name: "Apply terraform code changes"
     runs-on: ubuntu-latest #container with ubuntu image, runs below cmds/steps
     defaults:
-      run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
-        echo "Tags: ${{ github.event.inputs.tags }}" 
+      run:
         shell: bash
         working-directory: ./terraform #action will cd into this dir
-        
     
     steps:
       - name: "checkout the source code"
@@ -76,4 +73,7 @@ jobs: # jobs are steps to excute in the pipeline
         if: steps.plan.outcome == 'failure'
         run: exit 1 #the shell session gets exited, so this workflow session exits, by exiting or killing the ubuntu container
     
-
+    # for workfow_dispatch logs in steps
+    # run: |   
+    #     echo "Log level: ${{ github.event.inputs.logLevel }}"
+    #     echo "Tags: ${{ github.event.inputs.tags }}" 
