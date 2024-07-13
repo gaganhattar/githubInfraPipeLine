@@ -36,6 +36,8 @@ jobs: # jobs are steps to excute in the pipeline
     steps:
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
 
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
