@@ -49,6 +49,7 @@ jobs: # jobs are steps to excute in the pipeline
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
         with:
           token: env.GIT_ACTION_TOKEN
+          ref: stage
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
 
