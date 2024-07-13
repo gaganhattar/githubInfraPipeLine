@@ -23,7 +23,7 @@ env:
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE }} 
   AWS_REGION: us-east-1
   EKS_CLUSTER: github-practice-eks
-  GITHUB_TOKEN: $
+  GITHUB_TOKEN: ${{secrets.GIT_ACTION_TOKEN}}
 
 jobs: # jobs are steps to excute in the pipeline
   terraform:
@@ -37,7 +37,8 @@ jobs: # jobs are steps to excute in the pipeline
     steps:
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
-
+        with:
+          token: env.GIT_ACTION_TOKEN
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
 
@@ -53,13 +54,13 @@ jobs: # jobs are steps to excute in the pipeline
         id:   validate
         run:  terraform validate 
 
-      - name: Terraform Plan
+      - name: Terraform Plang
         id:   plan
         run: terraform plan -no-clor -input=false -out planfile # to see the -out to generate planfile for troublshooting to see details of the terraform genrated plan
         continue-on-error: true #continue to the next step if terraform plan cmd fials
 
       - name: Terraform plan status
-        if: steps.plam.outcome == 'failure'
+        if: steps.plan.outcome == 'failure'
         run: exit 1 #the shell session gets exited, so this workflow session exits, by exiting or killing the ubuntu container
     
 
