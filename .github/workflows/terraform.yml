@@ -22,7 +22,7 @@ env:
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE }} 
   AWS_REGION: us-east-1
   EKS_CLUSTER: github-practice-eks
-
+  GITHUB_TOKEN: $
 
 jobs: # jobs are steps to excute in the pipeline
   terraform:
@@ -37,7 +37,7 @@ jobs: # jobs are steps to excute in the pipeline
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
         with:
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          token: PAT
 
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
