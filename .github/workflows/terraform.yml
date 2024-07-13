@@ -48,7 +48,7 @@ jobs: # jobs are steps to excute in the pipeline
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
         with:
-          token: env.
+          token: ${{secrets.GIT_ACTION_TOKEN}}
           fetch-depth: 0
           ref: 'stage'
 
