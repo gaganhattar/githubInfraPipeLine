@@ -12,6 +12,7 @@ on: # events when the actions will trigger
       - main
     paths:
       - terraform/**
+      - .github/workflows/terraform.yml
 
 env:
   # AWS Credentials for deployment to AWS for Terraform
@@ -36,8 +37,6 @@ jobs: # jobs are steps to excute in the pipeline
     steps:
       - name: "checkout the source code"
         uses: actions/checkout@v4 #pre-defined actions in guthub marketplace
-        with:
-          ref: 'stage'
 
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
