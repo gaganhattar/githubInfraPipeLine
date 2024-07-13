@@ -3,7 +3,7 @@ run-name: This workflow has been triggered by ${{ github.actor}}
 on: # events when the actions will trigger
   push:
     branches:
-      - 'main'
+      # - 'main'
       - 'stage'
     paths:
       - 'transform/**'
