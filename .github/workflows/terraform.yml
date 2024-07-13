@@ -50,6 +50,7 @@ jobs: # jobs are steps to excute in the pipeline
         with:
           token: env.GIT_ACTION_TOKEN
           ref: stage
+          
       - name: Setup Terraform with specified version on the runner/container
         uses: hashicorp/setup-terraform@v3
 
