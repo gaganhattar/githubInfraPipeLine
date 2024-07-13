@@ -9,4 +9,3 @@ variable "clusterName" {
   type        = string
   default     = "github-practice-eks"
 }
-##
