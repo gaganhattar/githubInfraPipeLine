@@ -9,3 +9,9 @@ variable "clusterName" {
   type        = string
   default     = "github-practice-eks"
 }
+
+variable "S3BucketName" {
+  description = "Name of the EKS cluster"
+  type        = string
+  default     = "github-tf-state-bkt"
+}
