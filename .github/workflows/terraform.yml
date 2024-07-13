@@ -55,7 +55,7 @@ jobs: # jobs are steps to excute in the pipeline
       - name: check environment vars
         run: |
             echo env 
-            len = -n "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+             len=`echo -n "${{ secrets.AWS_SECRET_ACCESS_KEY }}"" | wc -c `
             echo "Length of aws  secret key = $len"
                     
       - name: Configure AWS Credentials
