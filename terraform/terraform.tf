@@ -28,8 +28,9 @@ terraform {
 
   backend "s3" {
     bucket = "github-tf-state-bkt"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
+    key    = "state/terraform.tfstate"
+    region = "us-west-1" //should be us-east-2 as all other infra is, just using this time for testing
+    access_key = "value"
   }
 
   # required_version = "~> 1.6.3"
