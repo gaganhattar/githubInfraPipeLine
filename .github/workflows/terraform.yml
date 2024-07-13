@@ -31,7 +31,7 @@ env:
 
   # S3 bucket for the Terraform State
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE }} 
-  AWS_REGION: us-east-1
+  AWS_REGION: us-east-2
   EKS_CLUSTER: github-practice-eks
   GITHUB_TOKEN: ${{secrets.GIT_ACTION_TOKEN}}
 
