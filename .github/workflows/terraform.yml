@@ -61,8 +61,4 @@ jobs: # jobs are steps to excute in the pipeline
         if: steps.plam.outcome == 'failure'
         run: exit 1 #the shell session gets exited, so this workflow session exits, by exiting or killing the ubuntu container
     
-      # - name: Terraform apply
-        # id: apply
-        # run: terraform apply -auto-approve
-
 
