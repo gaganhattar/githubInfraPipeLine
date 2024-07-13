@@ -54,8 +54,8 @@ jobs: # jobs are steps to excute in the pipeline
 
       - name: check environment vars
         run: |   
-            echo "aws access key is ${{ secrets.AWS_ACCESS_KEY_ID }}"
-            echo "aws secret is ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            if [ -n "${{ secrets.AWS_ACCESS_KEY_ID }}"]; then echo "valid aws access key"
+            if [ -n "${{ secrets.AWS_SECRET_ACCESS_KEY }}"]; then echo "valid aws secret key"
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
