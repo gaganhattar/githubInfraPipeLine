@@ -55,7 +55,7 @@ jobs: # jobs are steps to excute in the pipeline
       - name: check environment vars
         run: |
             echo env 
-            echo "Length  ${#AWS_SECRET}"
+            echo "Lengthof AWS secret = ${#AWS_SECRET}"
               
         env:
           AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

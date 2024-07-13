@@ -15,3 +15,8 @@ variable "S3BucketName" {
   type        = string
   default     = "github-tf-state-bkt"
 }
+
+variable "aws_credentials_path" {
+  description = ".aws/credentials"
+  default     = "~/.aws/credentials"
+}
