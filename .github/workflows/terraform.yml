@@ -1,6 +1,5 @@
-name :"Github IAAC"
-# on: //events when the actions will trigger
-on:
+name : Github IAAC
+on: # events when the actions will trigger
   push:
     branches:
       - main
