@@ -24,7 +24,7 @@ env:
   EKS_CLUSTER: github-practice-eks
   GITHUB_TOKEN: $
 
-jobs: # jobs are steps to excute in the pipeline
+ jobs: # jobs are steps to excute in the pipeline
   terraform:
     name: "Apply terraform code changes"
     runs-on: ubuntu-latest #container with ubuntu image, runs below cmds/steps
