@@ -8,11 +8,11 @@ on: # events when the actions will trigger
     # paths:
     #   - 'transform/**'
     #   # only for tech lead/arch, in cases where, the dev tested the code in stagging branch and then dev will request pull_request to approve the changes and merge to main branch, only some people like TL will have access to perfom any tasks on pull_request.
-  pull_request: 
-    branches:
-      - main
-    paths:
-      - terraform/**
+  # pull_request: 
+  #   branches:
+  #     - main
+  #   paths:
+  #     - terraform/**
 
   # workflow_dispatch:
   #   inputs:
